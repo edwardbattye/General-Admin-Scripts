@@ -18,6 +18,8 @@ If ($input -eq 'start'){
         Write-Host Stoping $server.Name 
         $server|Stop-Service
         }
+        }
+    }
 
 Foreach ($server in $servers) {
     $server | Select-Object Name,Status,MachineName | Format-Table -AutoSize
