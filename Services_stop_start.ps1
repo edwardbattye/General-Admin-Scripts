@@ -7,19 +7,23 @@ Foreach ($server in $servers) {
     $server | Select-Object Name,Status,MachineName | Format-Table -AutoSize
     }
 
-$input = Read-Host -Prompt Would you like to start or stop the services?
+$input = Read-Host -Prompt 'Would you like to start or stop the services?'
 If ($input -eq 'start'){
     Foreach($server in $servers){
-        Write-Host Starting $server.Name 
-        $server|Start-Service
+        Write-Host 'Starting' $server.Name 
+        $server|Start-Service -ErrorAction Stop
+        $server.WaitForStatus('Running')
+        Write-Host $server.Name 'Started' -ForegroundColor Green
+        }
         }
     Elseif($input -eq 'stop'){
         Foreach($server in $servers){
-        Write-Host Stoping $server.Name 
-        $server|Stop-Service
+        Write-Host 'Stopping' $server.Name 
+        $server|Stop-Service -ErrorAction Stop
+        $server.WaitForStatus('Stopped')
+        Write-Host $server.Name 'Stopped' -ForegroundColor Red
         }
         }
-    }
 
 Foreach ($server in $servers) {
     $server | Select-Object Name,Status,MachineName | Format-Table -AutoSize
