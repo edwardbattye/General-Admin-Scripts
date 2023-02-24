@@ -6,7 +6,7 @@ $svc.WaitForStatus('Running','00:01:00')
 
 #If services need restarting on other services you can do this here
 
-#Invoke-Command -ComputerName SVRATLAS001 -ScriptBlock {Restart-Service 'Atlas 6 Ax4 AX-live Service'}  
+#Invoke-Command -ComputerName 'Computer_name_here' -ScriptBlock {Restart-Service 'Service_name_here'}  
 
 $mailProps = @{
     To = ''
